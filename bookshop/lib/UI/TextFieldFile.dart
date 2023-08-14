@@ -1,24 +1,11 @@
 import 'package:flutter/material.dart';
 
 class TextFieldClass {
-  var email = TextEditingController();
+  var cont = TextEditingController();
   var pass = TextEditingController();
   bool val = true;
-  TextField emailTextField() {
-    return TextField(
-        controller: email,
 
-        decoration: InputDecoration(
-          hintText: 'email',
-
-            focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(color: Colors.blueAccent)),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-            suffixIcon: IconButton(onPressed: () {}, icon: Icon(Icons.email))));
-  }
-
-  TextField passTextField(String txt) {
+  TextField passTextField(String txt , Widget icon) {
     return TextField(
 
         controller: pass,
@@ -30,13 +17,14 @@ class TextFieldClass {
               borderSide: const BorderSide(color: Colors.blue)),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
           suffixIcon:
-              IconButton(onPressed: () {}, icon: Icon(Icons.remove_red_eye)),
+              IconButton(onPressed: () {}, icon: icon),
         ));
   }
 
-  TextField makeTextField(String hintTxt , Widget icon) {
+  TextField makeTextField(String hintTxt , Widget icon){
+
     return TextField(
-        controller: email,
+        controller: cont,
 
         decoration: InputDecoration(
             hintText:hintTxt,
@@ -48,5 +36,8 @@ class TextFieldClass {
             suffixIcon: IconButton(onPressed: () {}, icon: icon)));
   }
 
-
+  TextEditingController Controller()
+  {
+    return cont;
+  }
 }

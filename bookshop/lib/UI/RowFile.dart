@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RowClass {
-
   TextFieldClass txtObj = TextFieldClass();
 
   Row appName() {
@@ -11,7 +10,6 @@ class RowClass {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-
           child: const Text("Being Reader",
               style: TextStyle(fontSize: 32, fontWeight: FontWeight.w700)),
         )
@@ -20,13 +18,13 @@ class RowClass {
   } //end of AppName Method
 
   Row loginTxt() {
-    return Row(
+    return const Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
           width: 70,
           height: 32,
-          child: const Text("Login",
+          child: Text("Login",
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500)),
         )
       ],
@@ -53,13 +51,14 @@ class RowClass {
         Container(
           width: 260,
           height: 70,
-          child: txtObj.makeTextField("Email", const Icon(Icons.remove_red_eye)),
+          child:
+              txtObj.passTextField("Password", Icon(Icons.remove_red_eye)),
         )
       ],
     );
   }
-  TextFieldClass txtFieldCLass(){
 
+  TextFieldClass txtFieldCLass() {
     return txtObj;
   }
 }

@@ -1,12 +1,26 @@
+import 'package:bookshop/Controller/bookShopController.dart';
+import 'package:bookshop/Model/Factory.dart';
 import 'package:bookshop/UI/TextFieldFile.dart';
 import 'package:bookshop/UI/runner.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:bookshop/Model/Sellers.dart';
 
 class SignupUi {
-  TextFieldClass textFactory = TextFieldClass();
+  bookShopContrl? contrlObj;
+  sellerModel? sellerDto = Factory.makeSellerObj();
 
-  SafeArea SignUp(BuildContext context) {
+  SignupUi() {
+    contrlObj = Factory.makeContrlObj();
+  }
+
+  TextFieldClass nameField = TextFieldClass();
+  TextFieldClass emailField = TextFieldClass();
+  TextFieldClass contactField = TextFieldClass();
+  TextFieldClass addressField = TextFieldClass();
+  TextFieldClass passField = TextFieldClass();
+  TextFieldClass confirmPassField = TextFieldClass();
+
+  SafeArea signUp(BuildContext context) {
     return SafeArea(
         child: Center(
       child: Column(
@@ -33,40 +47,43 @@ class SignupUi {
             padding: const EdgeInsets.symmetric(vertical: 30),
             child: SizedBox(
                 width: 270,
-                child: textFactory.makeTextField(
+                child: nameField.makeTextField(
                     "Enter Name", const Icon(Icons.person))),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 0),
             child: SizedBox(
                 width: 270,
-                child: textFactory.makeTextField(
-                    "Email", const Icon(Icons.email))),
+                child:
+                    emailField.makeTextField("Email", const Icon(Icons.email))),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12),
             child: SizedBox(
                 width: 270,
-                child: textFactory.makeTextField(
+                child: contactField.makeTextField(
                     "Contact", const Icon(Icons.phone))),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12),
             child: SizedBox(
                 width: 270,
-                child: textFactory.makeTextField(
+                child: addressField.makeTextField(
                     "Address", const Icon(Icons.home))),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12),
             child: SizedBox(
-                width: 270, child: textFactory.passTextField("Password")),
+                width: 270,
+                child: passField.passTextField(
+                    "Password", const Icon(Icons.remove_red_eye))),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12),
             child: SizedBox(
                 width: 270,
-                child: textFactory.passTextField("Confirm Password")),
+                child: confirmPassField.passTextField(
+                    "Confirm Password", const Icon(Icons.remove_red_eye))),
           ),
           Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
@@ -74,13 +91,27 @@ class SignupUi {
                 width: 270,
                 child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context){
+                      bindingData(); //this method take text's from text-fields.and  Assign the values
+                      //send dto object to controller
+                      contrlObj?.signUpSeller(sellerDto!);
+
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (BuildContext context) {
                         return SignIn();
                       }));
-                    }, child: const Text("Signup")),
+                    },
+                    child: const Text("Signup")),
               ))
         ],
       ),
     ));
+  }
+
+  void bindingData() {
+    sellerDto?.name = nameField.Controller().text;
+    sellerDto?.email = emailField.Controller().text;
+    sellerDto?.contact = contactField.Controller().text;
+    sellerDto?.address = addressField.Controller().text;
+
   }
 }

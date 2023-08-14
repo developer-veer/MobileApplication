@@ -6,6 +6,7 @@ import 'package:bookshop/UI/runner.dart';
 import 'package:flutter/material.dart';
 
 class Login {
+
   RowClass rowObj = RowClass();
 
   // ignore: non_constant_identifier_names
